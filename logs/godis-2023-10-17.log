@@ -1,0 +1,50 @@
+[INFO][server.go:51] 2023/10/17 17:54:15 shutting down
+[INFO][echo.go:81] 2023/10/17 17:54:15 handler shutting down
+[INFO][server.go:51] 2023/10/17 17:55:13 shutting down
+[INFO][echo.go:81] 2023/10/17 17:55:13 handler shutting down
+[INFO][server.go:51] 2023/10/17 17:56:00 shutting down
+[INFO][echo.go:81] 2023/10/17 17:56:00 handler shutting down
+[INFO][server.go:51] 2023/10/17 17:58:34 shutting down
+[INFO][echo.go:81] 2023/10/17 17:58:34 handler shutting down
+[INFO][server.go:51] 2023/10/17 17:59:22 shutting down
+[INFO][echo.go:81] 2023/10/17 17:59:22 handler shutting down
+[INFO][server.go:51] 2023/10/17 17:59:48 shutting down
+[INFO][echo.go:81] 2023/10/17 17:59:48 handler shutting down
+[INFO][echo.go:81] 2023/10/17 17:59:48 handler shutting down
+[INFO][server.go:51] 2023/10/17 18:01:23 shutting down
+[ERROR][server.go:67] 2023/10/17 18:01:23 accept waring accept tcp [::]:6379: use of closed network connection
+[INFO][echo.go:81] 2023/10/17 18:01:23 handler shutting down
+[INFO][server.go:51] 2023/10/17 18:02:52 shutting down
+[ERROR][server.go:67] 2023/10/17 18:02:52 accept waring accept tcp [::]:6379: use of closed network connection
+[INFO][echo.go:81] 2023/10/17 18:02:52 handler shutting down
+[INFO][server.go:51] 2023/10/17 18:05:24 shutting down
+[ERROR][server.go:67] 2023/10/17 18:05:24 accept waring accept tcp [::]:6379: use of closed network connection
+[INFO][echo.go:81] 2023/10/17 18:05:24 handler shutting down
+[INFO][server.go:51] 2023/10/17 18:05:54 shutting down
+[ERROR][server.go:67] 2023/10/17 18:05:54 accept waring accept tcp [::]:6379: use of closed network connection
+[INFO][echo.go:81] 2023/10/17 18:05:54 handler shutting down
+[INFO][server.go:51] 2023/10/17 18:06:02 shutting down
+[ERROR][server.go:67] 2023/10/17 18:06:02 accept waring accept tcp [::]:6379: use of closed network connection
+[INFO][echo.go:81] 2023/10/17 18:06:02 handler shutting down
+[INFO][server.go:51] 2023/10/17 18:06:43 shutting down
+[ERROR][server.go:67] 2023/10/17 18:06:43 accept waring accept tcp [::]:6379: use of closed network connection
+[INFO][echo.go:81] 2023/10/17 18:06:43 handler shutting down
+[INFO][server.go:51] 2023/10/17 18:08:27 shutting down
+[ERROR][server.go:67] 2023/10/17 18:08:27 accept waring accept tcp [::]:6379: use of closed network connection
+[INFO][echo.go:82] 2023/10/17 18:08:27 handler shutting down
+[INFO][server.go:51] 2023/10/17 18:09:53 shutting down
+[ERROR][server.go:67] 2023/10/17 18:09:53 accept waring accept tcp [::]:6379: use of closed network connection
+[INFO][echo.go:83] 2023/10/17 18:09:53 handler shutting down
+[INFO][server.go:51] 2023/10/17 18:10:46 shutting down
+[ERROR][server.go:67] 2023/10/17 18:10:46 accept waring accept tcp [::]:6379: use of closed network connection
+[INFO][echo.go:83] 2023/10/17 18:10:46 handler shutting down
+[INFO][server.go:51] 2023/10/17 18:17:52 shutting down
+[ERROR][server.go:67] 2023/10/17 18:17:52 accept waring accept tcp [::]:6379: use of closed network connection
+[INFO][echo.go:83] 2023/10/17 18:17:52 handler shutting down
+[ERROR][main.go:43] 2023/10/17 18:17:53 listen tcp 127.0.0.1:6379: bind: An attempt was made to access a socket in a way forbidden by its access permissions.
+[ERROR][main.go:43] 2023/10/17 18:18:05 listen tcp 127.0.0.1:6379: bind: An attempt was made to access a socket in a way forbidden by its access permissions.
+[ERROR][main.go:43] 2023/10/17 18:18:07 listen tcp 127.0.0.1:6379: bind: An attempt was made to access a socket in a way forbidden by its access permissions.
+[ERROR][main.go:43] 2023/10/17 18:18:14 listen tcp 127.0.0.1:6379: bind: An attempt was made to access a socket in a way forbidden by its access permissions.
+[INFO][server.go:51] 2023/10/17 18:19:01 shutting down
+[ERROR][server.go:67] 2023/10/17 18:19:01 accept waring accept tcp [::]:6379: use of closed network connection
+[INFO][echo.go:83] 2023/10/17 18:19:01 handler shutting down

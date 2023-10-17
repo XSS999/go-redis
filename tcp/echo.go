@@ -3,6 +3,7 @@ package tcp
 import (
 	"bufio"
 	"context"
+	"fmt"
 	"go-redis/lib/logger"
 	"go-redis/lib/sync/atomic"
 	"go-redis/lib/sync/wait"
@@ -37,6 +38,10 @@ type EchoHandler struct {
 	closing    atomic.Boolean
 }
 
+func MakeHandler() *EchoHandler {
+	return &EchoHandler{}
+}
+
 // 处理一个新来的客户端
 func (handler *EchoHandler) Handler(ctx context.Context, conn net.Conn) {
 	if handler.closing.Get() {
@@ -67,6 +72,7 @@ func (handler *EchoHandler) Handler(ctx context.Context, conn net.Conn) {
 		}
 		// 我在处理写的业务
 		client.Waiting.Add(1)
+		fmt.Println(msg)
 		b := []byte(msg)
 		_, _ = conn.Write(b)
 		client.Waiting.Done()

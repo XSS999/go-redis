@@ -64,6 +64,7 @@ func ListenAndServe(listener net.Listener,
 	for true {
 		conn, err := listener.Accept()
 		if err != nil {
+			logger.Error("accept waring", err)
 			break
 		}
 		logger.Info("accepted link")
@@ -73,6 +74,7 @@ func ListenAndServe(listener net.Listener,
 			defer func() {
 				waitDone.Done()
 			}()
+			logger.Info("start client")
 			handler.Handler(ctx, conn)
 		}()
 	}
