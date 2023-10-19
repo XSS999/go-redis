@@ -2,6 +2,7 @@ package tcp
 
 import (
 	"context"
+	"fmt"
 	"go-redis/interface/tcp"
 	"go-redis/lib/logger"
 	"net"
@@ -32,10 +33,11 @@ func ListenAndServerWithSignal(cfg *Config, handler tcp.Handler) error {
 	}()
 
 	listener, err := net.Listen("tcp", cfg.Address)
+
 	if err != nil {
 		return err
 	}
-
+	logger.Info(fmt.Sprintf("bind: %s, start listening...", cfg.Address))
 	ListenAndServe(listener, handler, closeChan)
 
 	return nil
@@ -47,7 +49,7 @@ func ListenAndServe(listener net.Listener,
 
 	// 通过chan来关闭
 	go func() {
-		<-closeChan
+		<-closeChan //不需要返回值，因为是一个空的结构体，也就相当于是一个信号的作用
 		logger.Info("shutting down")
 		_ = listener.Close()
 		_ = handler.Close()
@@ -59,6 +61,7 @@ func ListenAndServe(listener net.Listener,
 		_ = handler.Close()
 	}()
 
+	// 等待所有的客户端handler完
 	var waitDone sync.WaitGroup
 	ctx := context.Background()
 	for true {

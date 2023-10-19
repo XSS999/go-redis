@@ -12,8 +12,8 @@ import (
 const configFile string = "redis.conf"
 
 var defaultProperties = &config.ServerProperties{
-	Bind: "0.0.0.0",
-	Port: 6379,
+	Bind: "127.0.0.1",
+	Port: 6388,
 }
 
 func fileExists(filename string) bool {

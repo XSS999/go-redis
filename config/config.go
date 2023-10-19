@@ -31,7 +31,7 @@ func init() {
 	// default config
 	Properties = &ServerProperties{
 		Bind:       "127.0.0.1",
-		Port:       6379,
+		Port:       6388,
 		AppendOnly: false,
 	}
 }

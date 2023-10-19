@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"go-redis/database"
 	databaseface "go-redis/interface/database"
 	"go-redis/lib/logger"
 	"go-redis/lib/sync/atomic"
@@ -25,6 +26,7 @@ type RespHandler struct {
 
 func MakeHandler() *RespHandler {
 	var db databaseface.Database
+	db = database.NewEchoDatabase()
 	// TODO: 实现Database
 	return &RespHandler{
 		db: db,
@@ -42,6 +44,7 @@ func (r *RespHandler) Handler(ctx context.Context, conn net.Conn) {
 		_ = conn.Close()
 	}
 	client := connection.NewConn(conn)
+
 	r.activeConn.Store(client, struct {
 	}{})
 	ch := paser.ParseStream(conn)
@@ -68,18 +71,19 @@ func (r *RespHandler) Handler(ctx context.Context, conn net.Conn) {
 		}
 		// exec
 		if payload.Data == nil {
+			logger.Error("empty payload")
 			continue
 		}
-		reply, ok := payload.Data.(*reply.MultiBulkReply)
+		bulkReply, ok := payload.Data.(*reply.MultiBulkReply)
 		if !ok {
-			logger.Error("require")
+			logger.Error("require multi bulk reply")
 			continue
 		}
-		result := r.db.Exec(client, reply.Args)
+		result := r.db.Exec(client, bulkReply.Args)
 		if result != nil {
-			client.Write(result.ToBytes())
+			_ = client.Write(result.ToBytes())
 		} else {
-			client.Write(unknownErrReplyBytes)
+			_ = client.Write(unknownErrReplyBytes)
 		}
 	}
 

@@ -63,7 +63,7 @@ func (handler *EchoHandler) Handler(ctx context.Context, conn net.Conn) {
 		if err != nil {
 			// 手动关闭
 			if err == io.EOF {
-				logger.Info("Conneting close")
+				logger.Info("Connecting close")
 				handler.activeConn.Delete(client)
 			} else {
 				logger.Warn(err)
@@ -84,7 +84,7 @@ func (handler *EchoHandler) Close() error {
 	handler.closing.Set(true)
 
 	// 关掉所有的客户端
-	handler.activeConn.Range(func(key, value interface{}) bool {
+	handler.activeConn.Range(func(key interface{}, value interface{}) bool {
 		client := key.(*EchoClient)
 		_ = client.Conn.Close()
 		//是否继续遍历下一个
