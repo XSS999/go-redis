@@ -1,5 +1,0 @@
-[INFO][server.go:51] 2023/10/18 22:09:40 shutting down
-[INFO][handler.go:89] 2023/10/18 22:09:40 handler shutting down
-[INFO][server.go:51] 2023/10/18 22:10:34 shutting down
-[ERROR][server.go:67] 2023/10/18 22:10:34 accept waring accept tcp [::]:6379: use of closed network connection
-[INFO][handler.go:89] 2023/10/18 22:10:34 handler shutting down
