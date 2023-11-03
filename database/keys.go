@@ -2,6 +2,7 @@ package database
 
 import (
 	"go-redis/interface/resp"
+	"go-redis/lib/wildcard"
 	"go-redis/resp/reply"
 )
 
@@ -33,19 +34,77 @@ func execFlushDB(db *DB, args [][]byte) resp.Reply {
 	return reply.MakeOkReply()
 }
 
+// TYPE k1
 func execType(db *DB, args [][]byte) resp.Reply {
 	key := string(args[0])
-	entity, exsits := db.GetEntity(key)
-	if !exsits {
+	entity, exists := db.GetEntity(key)
+	if !exists {
 		return reply.MakeStatusReply("none")
 	}
 	switch entity.Data.(type) {
-
+	// TODO: 实现list、set等数据结构
+	case []byte:
+		return reply.MakeStatusReply("string")
 	}
+
+	return reply.UnknowErrReply{}
+}
+
+// RENAME k1 k2
+func execRename(db *DB, args [][]byte) resp.Reply {
+	src := string(args[0])
+	dest := string(args[1])
+
+	entity, exists := db.GetEntity(src)
+	if !exists {
+		return reply.MakeErrReply("no such key")
+	}
+
+	db.PutEntity(dest, entity)
+	db.Remove(src)
+
+	return reply.MakeOkReply()
+}
+
+// RENAMENX
+func execRenamenx(db *DB, args [][]byte) resp.Reply {
+	src := string(args[0])
+	dest := string(args[1])
+
+	_, ok := db.GetEntity(dest)
+	if ok {
+		return reply.MakeIntReply(0)
+	}
+	entity, exists := db.GetEntity(src)
+	if !exists {
+		return reply.MakeErrReply("no such key")
+	}
+
+	db.PutEntity(dest, entity)
+	db.Remove(src)
+
+	return reply.MakeIntReply(1)
+}
+
+// KEYS *
+func execKeys(db *DB, args [][]byte) resp.Reply {
+	pattern := wildcard.CompilePattern(string(args[0]))
+	result := make([][]byte, 0)
+	db.data.ForEach(func(key string, val interface{}) bool {
+		if pattern.IsMatch(key) {
+			result = append(result, []byte(key))
+		}
+		return true
+	})
+	return reply.MakeMultiBulkReply(result)
 }
 
 func init() {
 	RegisterCommand("DEL", execDel, -2)
 	RegisterCommand("EXISTS", execExists, -2)
-	RegisterCommand("flushdb", execFlushDB, -1) // FLUSHDB a b c
+	RegisterCommand("FLUSHDB", execFlushDB, -1) // FLUSHDB a b c
+	RegisterCommand("TYPE", execType, 2)
+	RegisterCommand("RENAME", execRename, 3)
+	RegisterCommand("RENAMENX", execRenamenx, 3)
+	RegisterCommand("KEYS", execKeys, 2)
 }
