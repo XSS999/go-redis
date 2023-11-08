@@ -7,7 +7,7 @@ import (
 	"go-redis/lib/logger"
 	"go-redis/lib/sync/atomic"
 	"go-redis/resp/connection"
-	"go-redis/resp/paser"
+	"go-redis/resp/parser"
 	"go-redis/resp/reply"
 	"io"
 	"net"
@@ -26,7 +26,7 @@ type RespHandler struct {
 
 func MakeHandler() *RespHandler {
 	var db databaseface.Database
-	db = database.NewDatabase()
+	db = database.NewStandaloneDatabase()
 	return &RespHandler{
 		db: db,
 	}
@@ -46,7 +46,7 @@ func (r *RespHandler) Handler(ctx context.Context, conn net.Conn) {
 
 	r.activeConn.Store(client, struct {
 	}{})
-	ch := paser.ParseStream(conn)
+	ch := parser.ParseStream(conn)
 	for payload := range ch {
 		//error
 		if payload.Err != nil {

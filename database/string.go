@@ -74,3 +74,7 @@ func init() {
 	RegisterCommand("GetSET", execGetSet, 3)
 	RegisterCommand("StrLen", execStrLen, 2)
 }
+
+/**
+
+ */

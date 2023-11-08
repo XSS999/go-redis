@@ -6,7 +6,7 @@ import (
 	"go-redis/lib/logger"
 	"go-redis/lib/utils"
 	"go-redis/resp/connection"
-	"go-redis/resp/paser"
+	"go-redis/resp/parser"
 	"go-redis/resp/reply"
 	"io"
 	"os"
@@ -96,7 +96,7 @@ func (handler *AofHandler) loadAof() {
 		return
 	}
 	defer file.Close()
-	ch := paser.ParseStream(file)
+	ch := parser.ParseStream(file)
 	fackConn := &connection.Connection{}
 
 	for p := range ch {
